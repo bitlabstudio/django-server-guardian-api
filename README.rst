@@ -70,13 +70,13 @@ That mean, your API endpoint will, if all is correct, return something like this
 
     [
         {
-            'mail_queue': {
-                'status': 'OK',
-                'info': "No deferred email queued. That's great!",
-            }
+            'label': 'mail_queue',
+            'status': 'OK',
+            'info': "No deferred email queued. That's great!",
         },
         {
-            'other_endpoint': {...}]
+            'label': 'other_metric',
+            ...
         },
     ]
 
