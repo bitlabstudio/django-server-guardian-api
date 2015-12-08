@@ -41,6 +41,11 @@ class NoseCoverageTestRunner(CoverageRunner, NoseTestSuiteRunner):
 def runtests(*test_args):
     if django.VERSION >= (1, 7):
         django.setup()
+
+    local(
+        'flake8 --ignore=E126 --ignore=W391 --statistics'
+        ' --exclude=submodules,migrations,build .')
+
     failures = NoseCoverageTestRunner(verbosity=2, interactive=True).run_tests(
         test_args)
 
