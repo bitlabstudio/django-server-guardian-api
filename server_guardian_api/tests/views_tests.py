@@ -11,4 +11,16 @@ class ServerGuardianAPIViewTestCase(ViewRequestFactoryTestMixin, TestCase):
     view_class = views.ServerGuardianAPIView
 
     def test_view(self):
-        self.is_callable()
+        self.is_callable(data={'token': 'test_token123'})
+        resp = self.get()
+        self.assertEqual(
+            resp.status_code,
+            403,
+            msg='Withouth a token, the request should be forbidden.'
+        )
+        resp = self.get(data={'token': 'wrong_token'})
+        self.assertEqual(
+            resp.status_code,
+            403,
+            msg='With an incorrect token, the request should be forbidden.'
+        )

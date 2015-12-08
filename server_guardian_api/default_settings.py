@@ -9,3 +9,5 @@ PROCESSORS = getattr(
         ('dummy', 'server_guardian_api.processors.dummy_processor')
     ]
 )
+
+SECURITY_TOKEN = settings.SERVER_GUARDIAN_SECURITY_TOKEN

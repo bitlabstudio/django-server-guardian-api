@@ -1,11 +1,12 @@
 """Views for the server_guardian_api app."""
 from django.views.generic import View
+from django.http import HttpResponseForbidden
 
 from django_libs.views_mixins import JSONResponseMixin
 from django_libs.loaders import load_member
 
 from .constants import ERROR_RESPONSE
-from .default_settings import PROCESSORS
+from .default_settings import PROCESSORS, SECURITY_TOKEN
 
 
 class ServerGuardianAPIView(JSONResponseMixin, View):
@@ -16,6 +17,8 @@ class ServerGuardianAPIView(JSONResponseMixin, View):
     """
 
     def get(self, request, *args, **kwargs):
+        if request.REQUEST.get('token') != SECURITY_TOKEN:
+            return HttpResponseForbidden()
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
 
