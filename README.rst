@@ -1,10 +1,10 @@
 Django Server Guardian API
-============
+==========================
 
-API offering health metrics for the ``django-server-guardian`` app.
+API offering health metrics for the `Django Server Guardian`_ app.
 
-Installation
-------------
+Installation and Usage
+----------------------
 
 To get the latest stable release from PyPi
 
@@ -17,8 +17,6 @@ To get the latest commit from GitHub
 .. code-block:: bash
 
     pip install -e git+git://github.com/bitmazk/django-server-guardian-api.git#egg=server_guardian_api
-
-TODO: Describe further installation steps (edit / remove the examples below):
 
 Add ``server_guardian_api`` to your ``INSTALLED_APPS``
 
@@ -38,25 +36,49 @@ Add the ``server_guardian_api`` URLs to your ``urls.py``
         url(r'^server-guardian-api/', include('server_guardian_api.urls')),
     )
 
-Before your tags/filters are available in your templates, load them by using
+As a simple auth method add the security token as described in the README of
+the `Django Server Guardian`_ to your settings as ``SERVER_GUARDIAN_SECURITY_TOKEN``
 
-.. code-block:: html
+.. code-block:: python
 
-	{% load server_guardian_api_tags %}
-
-
-Don't forget to migrate your database
-
-.. code-block:: bash
-
-    ./manage.py migrate server_guardian_api
+    SERVER_GUARDIAN_SECURITY_TOKEN = 'asd0hb42t92-example-token-39gh1g3-91hfosj325'
 
 
-Usage
------
+Add the ``SERVER_GUARDIAN_PROCESSORS`` setting where you're endpoint metrics
+are defined.
 
-TODO: Describe usage or point to docs. Also describe available settings and
-templatetags.
+.. code-block:: python
+
+    SERVER_GUARDIAN_PROCESSORS = (
+        ('mail_queue', 'server_guardian_api.endpoints.mailer_mail'),
+        ('other_endpoit', 'myapp.mymodule.myfunction'),
+    )
+
+The functions defined in this setting must return a dictionary in the following
+format
+
+.. code-block:: python
+
+    {
+        'status': 'OK', # must be one of: "OK", "WARNING", "DANGER"
+        'info': 'additional text describing the status. e.g. type of error',
+    }
+
+That mean, your API endpoint will, if all is correct, return something like this
+
+.. code-block:: python
+
+    [
+        {
+            'mail_queue': {
+                'status': 'OK',
+                'info': "No deferred email queued. That's great!",
+            }
+        },
+        {
+            'other_endpoint': {...}]
+        },
+    ]
 
 
 Contribute
@@ -80,3 +102,5 @@ If you want to contribute to this project, please perform the following steps
 In order to run the tests, simply execute ``tox``. This will install two new
 environments (for Django 1.6 and Django 1.7) and run the tests against both
 environments.
+
+.. _Django Server Guardian: https://github.com/bitmazk/django-server-guardian
