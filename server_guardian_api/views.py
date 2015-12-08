@@ -22,7 +22,7 @@ class ServerGuardianAPIView(JSONResponseMixin, View):
 
     def get_context_data(self, **kwargs):
         ctx = []
-        for label, processor_path in PROCESSORS:
+        for processor_path in PROCESSORS:
             processor = load_member(processor_path)
             try:
                 ctx.append(processor())

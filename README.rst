@@ -50,8 +50,8 @@ are defined.
 .. code-block:: python
 
     SERVER_GUARDIAN_PROCESSORS = (
-        ('mail_queue', 'server_guardian_api.endpoints.mailer_mail'),
-        ('other_endpoit', 'myapp.mymodule.myfunction'),
+        'server_guardian_api.endpoints.mailer_mail',
+        'myapp.mymodule.myfunction',
     )
 
 The functions defined in this setting must return a dictionary in the following
