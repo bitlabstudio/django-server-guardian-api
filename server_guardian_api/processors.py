@@ -11,6 +11,7 @@ def exception_processor():  # pragma: no cover
 def dummy_processor():  # pragma: no cover
     """Use this processor to test, that you've set up everything correct."""
     return {
+        'label': 'dummy',
         'status': SERVER_STATUS['OK'],
         'info': 'This is a dummy response.'
     }

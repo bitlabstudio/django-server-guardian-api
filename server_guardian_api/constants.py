@@ -5,8 +5,3 @@ SERVER_STATUS = {  # pragma: no cover
     'WARNING': 'WARNING',
     'DANGER': 'DANGER',
 }
-
-ERROR_RESPONSE = {
-    'status': SERVER_STATUS['DANGER'],
-    'info': 'The server encountered an error while running the processor. '
-}

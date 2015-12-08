@@ -1,11 +1,9 @@
 """Views for the server_guardian_api app."""
 from django.views.generic import View
 from django.http import HttpResponseForbidden
-
 from django_libs.views_mixins import JSONResponseMixin
 from django_libs.loaders import load_member
-
-from .constants import ERROR_RESPONSE
+from .constants import SERVER_STATUS
 from .default_settings import PROCESSORS, SECURITY_TOKEN
 
 
@@ -27,10 +25,15 @@ class ServerGuardianAPIView(JSONResponseMixin, View):
         for label, processor_path in PROCESSORS:
             processor = load_member(processor_path)
             try:
-                ctx.append({label: processor()})
+                ctx.append(processor())
             except Exception as ex:
-                info = ERROR_RESPONSE['info']
-                response = ERROR_RESPONSE
-                response.update({'info': info + str(ex)})
-                ctx.append({label: response})
+                response = {
+                    'label': 'error',
+                    'status': SERVER_STATUS['DANGER'],
+                    'info': (
+                        'The server encountered an error while running this'
+                        ' processor: "{0}"'.format(ex)
+                    )
+                }
+                ctx.append(response)
         return ctx
