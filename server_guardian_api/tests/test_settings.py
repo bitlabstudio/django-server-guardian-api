@@ -2,13 +2,15 @@
 import os
 import logging
 
+# prevent output of verbose DB gibberish
+logging.getLogger("django").setLevel(logging.WARN)
+
 DEBUG = True
 
 SITE_ID = 1
 
 APP_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '..'))
-
 
 DATABASES = {
     'default': {
@@ -63,3 +65,8 @@ COVERAGE_MODULE_EXCLUDES = [
 COVERAGE_MODULE_EXCLUDES += EXTERNAL_APPS
 
 SECRET_KEY = 'foobar'
+
+SERVER_GUARDIAN_PROCESSORS = [
+    ('dummy', 'server_guardian_api.processors.dummy_processor'),
+    ('exception', 'server_guardian_api.processors.exception_processor')
+]
