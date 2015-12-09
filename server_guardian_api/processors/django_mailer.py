@@ -6,13 +6,13 @@ from ..constants import SERVER_STATUS
 
 # TODO find way to make these into settings (maybe dict? only clean namespace?)
 # From here up it counts as WARNING
-WARNING_THRESHOLD = 0
+WARNING_THRESHOLD = 1
 # From here up it counts as DANGER
 DANGER_THRESHOLD = 10
 
 
-# TODO how do you test deferred emails? Mock manager?
 def deferred_emails():
+    """Checks for deferred email, that otherwise fill up the queue."""
     status = SERVER_STATUS['OK']
     count = Message.objects.deferred().count()
 
