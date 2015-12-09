@@ -1,6 +1,8 @@
+# for regular testing
 coverage<4.0.0
 django-coverage
 django-nose
+django-libs
 fabric
 flake8
 ipdb
@@ -10,3 +12,6 @@ tox
 django<1.9
 django-compat
 six
+
+# for processors
+django-mailer
