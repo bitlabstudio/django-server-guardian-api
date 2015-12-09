@@ -1,4 +1,10 @@
-=== 0.0.X (onggoing, to be released as 0.1) ===
+=== 0.1.X (ongoing, to be released as 0.1) ===
+
+=== 0.1.1 ===
+- added django-mailer processor: email_queue
+
+=== 0.1 ===
+- added django-mailer processor: deferred_emails
 - Initial commit
 
 
