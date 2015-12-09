@@ -67,8 +67,8 @@ COVERAGE_MODULE_EXCLUDES += EXTERNAL_APPS
 SECRET_KEY = 'foobar'
 
 SERVER_GUARDIAN_PROCESSORS = [
-    ('dummy', 'server_guardian_api.processors.dummy_processor'),
-    ('exception', 'server_guardian_api.processors.exception_processor')
+    'server_guardian_api.processors.debug.dummy_processor',
+    'server_guardian_api.processors.debug.exception_processor',
 ]
 
 SERVER_GUARDIAN_SECURITY_TOKEN = 'test_token123'
