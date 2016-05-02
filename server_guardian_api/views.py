@@ -15,7 +15,7 @@ class ServerGuardianAPIView(JSONResponseMixin, View):
     """
 
     def get(self, request, *args, **kwargs):
-        if request.REQUEST.get('token') != SECURITY_TOKEN:
+        if request.GET.get('token') != SECURITY_TOKEN:
             return HttpResponseForbidden()
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)

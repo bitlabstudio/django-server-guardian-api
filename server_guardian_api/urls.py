@@ -1,12 +1,11 @@
 """URLs for the server_guardian_api app."""
-from compat import patterns, url
+from django.conf.urls import url
 
 from . import views
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$',
         views.ServerGuardianAPIView.as_view(),
         name='server_guardian_api'),
-)
+]

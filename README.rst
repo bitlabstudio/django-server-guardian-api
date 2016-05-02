@@ -31,10 +31,9 @@ Add the ``server_guardian_api`` URLs to your ``urls.py``
 
 .. code-block:: python
 
-    urlpatterns = patterns('',
-        ...
+    urlpatterns = [
         url(r'^server-guardian-api/', include('server_guardian_api.urls')),
-    )
+    ]
 
 As a simple auth method add the security token as described in the README of
 the `Django Server Guardian`_ to your settings as ``SERVER_GUARDIAN_SECURITY_TOKEN``
@@ -101,7 +100,7 @@ If you want to contribute to this project, please perform the following steps
     # Send us a pull request for your feature branch
 
 In order to run the tests, simply execute ``tox``. This will install two new
-environments (for Django 1.6 and Django 1.7) and run the tests against both
+environments (for Django 1.8 and Django 1.9) and run the tests against both
 environments.
 
 .. _Django Server Guardian: https://github.com/bitmazk/django-server-guardian

@@ -1,17 +1,7 @@
-# for regular testing
-coverage<4.0.0
-django-coverage
-django-nose
-django-libs
-fabric
+coverage
+fabric3
+paramiko<2.0.0
 flake8
 ipdb
-mixer
-mock
 tox
-django<1.9
-django-compat
-six
-
-# for processors
-django-mailer
+mixer
